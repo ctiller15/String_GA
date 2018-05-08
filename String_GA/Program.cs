@@ -10,6 +10,9 @@ namespace String_GA
     {
         static void Main(string[] args)
         {
+            var pop = new Population();
+            pop.CreatePopulation();
+            Console.ReadLine();
         }
     }
 }
