@@ -9,7 +9,7 @@ namespace String_GA
     class Individual
     {
         public int Length { get; set; }
-        public int Fitness { get; set; }
+        public int Fitness { get; set; } = 0;
         public List<string> Genes { get; set; } = new List<string>();
 
         public void GetLength(int maxLength)
@@ -39,10 +39,20 @@ namespace String_GA
             Console.WriteLine(string.Join("", Genes));
         }
 
+        public void CalculateFitness()
+        {
+            // First calculate based on length.
+            int LengthFitness = (Population.Matchedstring.Count() - Math.Abs(Population.Matchedstring.Count() - Length));
+            Console.WriteLine($"Length fitness: {LengthFitness}");
+            // Then calculate based on having correct letters.
+            // Then calculate based on having letters in correct position.
+        }
+
         public Individual()
         {
             GetLength(Population.Matchedstring.Count() * 2);
             PopulateGenes();
+            CalculateFitness();
 
         }
     }
