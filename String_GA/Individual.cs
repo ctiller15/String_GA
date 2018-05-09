@@ -41,11 +41,37 @@ namespace String_GA
 
         public void CalculateFitness()
         {
+            Console.WriteLine(string.Join("", Genes));
             // First calculate based on length.
             int LengthFitness = (Population.Matchedstring.Count() - Math.Abs(Population.Matchedstring.Count() - Length));
-            //Console.WriteLine($"Length fitness: {LengthFitness}");
+            Console.WriteLine($"Length fitness: {LengthFitness}");
             // Then calculate based on having correct letters.
-            Services.CreateBucket(Genes);
+
+
+            int StringFitness = 0;
+            // If it has the right letter, add to the fitness...
+            var strBucket = Services.CreateBucket(Genes);
+
+            foreach (var unichar in Population.MatchedStringBucket)
+            {
+                if (strBucket.ContainsKey(unichar.Key))
+                {
+                    // match it ONLY for every character that it has.
+                    if (strBucket[unichar.Key] <= unichar.Value)
+                    {
+                        StringFitness += strBucket[unichar.Key];
+                    }
+                    else
+                    {
+                        StringFitness += unichar.Value;
+                    }
+                }
+            }
+
+            Console.WriteLine($"String fitness: {StringFitness}");
+
+
+
             // Then calculate based on having letters in correct position.
         }
 

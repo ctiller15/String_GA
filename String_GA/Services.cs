@@ -10,7 +10,7 @@ namespace String_GA
     {
         static public Random Rand = new Random();
 
-        static public void CreateBucket(List<string> str)
+        static public Dictionary<char, int> CreateBucket(List<string> str)
         {
             //Console.WriteLine($"{string.Join(",",str.Distinct())} , {string.Join(",",str.Distinct().Count())}");
             var groupBucket = str
@@ -23,12 +23,14 @@ namespace String_GA
 
             Dictionary<char, int> groupDict = groupBucket.ToDictionary(TD => Convert.ToChar(TD.Letter), TD => TD.Count);
 
-            Console.WriteLine(string.Join("",str));
-            foreach(var item in groupDict)
-            {
-                Console.WriteLine($"{string.Join(",",item.Key)}, {item.Value}");
-            }
-            Console.WriteLine("\n");
+            //Console.WriteLine(string.Join("",str));
+            //foreach(var item in groupDict)
+            //{
+            //    Console.WriteLine($"{string.Join(",",item.Key)}, {item.Value}");
+            //}
+            //Console.WriteLine("\n");
+
+            return groupDict;
         }
     }
 }
