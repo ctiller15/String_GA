@@ -15,7 +15,7 @@ namespace String_GA
         public void GetLength(int maxLength)
         {
             Length = Services.Rand.Next(maxLength);
-            Console.WriteLine(Length);
+            //Console.WriteLine(Length);
         }
 
         public char GetRandomCharacter()
@@ -36,15 +36,16 @@ namespace String_GA
 
                 Genes.Add(Convert.ToString(GetRandomCharacter()));
             }
-            Console.WriteLine(string.Join("", Genes));
+            //Console.WriteLine(string.Join("", Genes));
         }
 
         public void CalculateFitness()
         {
             // First calculate based on length.
             int LengthFitness = (Population.Matchedstring.Count() - Math.Abs(Population.Matchedstring.Count() - Length));
-            Console.WriteLine($"Length fitness: {LengthFitness}");
+            //Console.WriteLine($"Length fitness: {LengthFitness}");
             // Then calculate based on having correct letters.
+            Services.CreateBucket(Genes);
             // Then calculate based on having letters in correct position.
         }
 

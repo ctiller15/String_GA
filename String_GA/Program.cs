@@ -10,7 +10,7 @@ namespace String_GA
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Population.Matchedstring);
+            //Console.WriteLine(Population.Matchedstring);
             var pop = new Population();
             pop.CreatePopulation();
             Console.ReadLine();
