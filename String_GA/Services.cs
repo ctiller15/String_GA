@@ -32,5 +32,43 @@ namespace String_GA
 
             return groupDict;
         }
+
+        static public int CountMatchedChars(List<char> let1, List<char> let2)
+        {
+            int count = 0;
+            //if (Genes.Count() >= Population.Matchedstring.Count())
+            //{
+            //    for (int i = 0; i < Population.Matchedstring.Count(); i++)
+            //    {
+            //        if (temp[i] == Population.Matchedstring[i])
+            //        {
+            //            MatchFitness += 1;
+            //        }
+            //    }
+            //}
+
+            //if(let1.Count() >= let2.Count())
+            //{
+            for(int i = 0; i < let2.Count(); i++)
+            {
+                if(let1[i] == let2[i])
+                {
+                    count += 1;
+                }
+            }
+            //} else
+            //{
+            //    for (int i = 0; i < let1.Count(); i++)
+            //    {
+            //        if (let2[i] == let1[i])
+            //        {
+            //            count += 1;
+            //        }
+            //    }
+            //}
+
+            return count;
+
+        }
     }
 }

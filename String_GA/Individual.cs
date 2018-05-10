@@ -44,12 +44,36 @@ namespace String_GA
             Console.WriteLine(string.Join("", Genes));
             // First calculate based on length.
             int LengthFitness = (Population.Matchedstring.Count() - Math.Abs(Population.Matchedstring.Count() - Length));
-            Console.WriteLine($"Length fitness: {LengthFitness}");
+            //Console.WriteLine($"Length fitness: {LengthFitness}");
             // Then calculate based on having correct letters.
 
-
-            int StringFitness = 0;
             // If it has the right letter, add to the fitness...
+            var strBucket = Services.CreateBucket(Genes);
+
+            // Probably weight a little heavier.
+            int StringFitness = CalculateStringFitness(strBucket);
+
+            //Console.WriteLine($"String fitness: {StringFitness}");
+
+            // Then calculate based on having letters in correct position.
+            int MatchFitness = 0;
+
+            // If the length of the genestring is greater than the length of the matching string...
+
+            MatchFitness = CalculateMatchFitness();
+
+            //Console.WriteLine($"Match Fitness: {MatchFitness}");
+
+            int TotalFitness = CalculateTotalFitness(LengthFitness, StringFitness, MatchFitness);
+
+            Console.WriteLine($"Total Fitness: {TotalFitness}");
+
+            Fitness = TotalFitness;
+        }
+
+        public int CalculateStringFitness(Dictionary<char,int> bucket)
+        {
+            int StringFitness = 0;
             var strBucket = Services.CreateBucket(Genes);
 
             foreach (var unichar in Population.MatchedStringBucket)
@@ -68,11 +92,30 @@ namespace String_GA
                 }
             }
 
-            Console.WriteLine($"String fitness: {StringFitness}");
+            return StringFitness;
+        }
 
+        public int CalculateMatchFitness()
+        {
+            int MatchFitness = 0;
 
+            var temp = Genes.Select(s => Convert.ToChar(s)).ToList();
 
-            // Then calculate based on having letters in correct position.
+            if (Genes.Count() >= Population.Matchedstring.Count())
+            {
+                MatchFitness = Services.CountMatchedChars(temp, new List<char>(Population.Matchedstring));
+            }
+            else
+            {
+                MatchFitness = Services.CountMatchedChars(new List<char>(Population.Matchedstring), temp);
+            }
+            return MatchFitness;
+        }
+
+        static int CalculateTotalFitness(int lenFit, int strFit, int matchFit)
+        {
+            int TotalFitness = lenFit + (strFit * 3) + (matchFit * 5);
+            return TotalFitness;
         }
 
         public Individual()
@@ -80,7 +123,6 @@ namespace String_GA
             GetLength(Population.Matchedstring.Count() * 2);
             PopulateGenes();
             CalculateFitness();
-
         }
     }
 }
