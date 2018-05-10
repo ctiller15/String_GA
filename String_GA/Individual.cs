@@ -39,7 +39,7 @@ namespace String_GA
 
         public void CalculateFitness()
         {
-            Console.WriteLine(string.Join("", Genes));
+            //Console.WriteLine(string.Join("", Genes));
             // First calculate based on length.
             int LengthFitness = (Population.Matchedstring.Count() - Math.Abs(Population.Matchedstring.Count() - Length));
 
@@ -57,7 +57,7 @@ namespace String_GA
 
             int TotalFitness = CalculateTotalFitness(LengthFitness, StringFitness, MatchFitness);
 
-            Console.WriteLine($"Total Fitness: {TotalFitness}");
+            //Console.WriteLine($"Total Fitness: {TotalFitness}");
 
             Fitness = TotalFitness;
         }

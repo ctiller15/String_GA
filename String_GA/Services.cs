@@ -10,6 +10,20 @@ namespace String_GA
     {
         static public Random Rand = new Random();
 
+        // Creates a random number based on a Gaussian.
+        //https://stackoverflow.com/questions/218060/random-gaussian-variables?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+        static public double RandGaussian()
+        {
+            int mean = 0;
+            double stdDev = .3;
+            double u1 = 1.0 - Rand.NextDouble();
+            double u2 = 1.0 - Rand.NextDouble();
+            double randStdNormal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);
+            double randNormal = (mean + stdDev * randStdNormal + 1) / 2; // Shift gaussian over to the right.
+            Console.WriteLine(randNormal);
+            return randNormal;
+        }
+
         static public Dictionary<char, int> CreateBucket(List<string> str)
         {
            var groupBucket = str

@@ -35,13 +35,61 @@ namespace String_GA
         // Crosses by using fittest of population.
         public void CrossPopulation()
         {
-            if(FittestPop != null)
+
+            for(int i = 0; i < PopSize; i++)
             {
-                foreach(var indiv in FittestPop)
-                {
-                    Console.WriteLine(string.Join("",indiv.Genes));
-                }
+                Console.WriteLine("\n");
+                var randIndividuala = FittestPop[Services.Rand.Next(FittestPop.Count())];
+                var randIndividualb = FittestPop[Services.Rand.Next(FittestPop.Count())];
+                Console.WriteLine($"{string.Join("", randIndividuala.Genes)} , {string.Join("", randIndividualb.Genes)}");
+
+                // Create the slice points, more weighted towards the center via a gaussian distribution.
+                var randGaussA = Services.RandGaussian();
+                var randGaussB = Services.RandGaussian();
+
+                var clampedA = randGaussA > 1.00 ? 1.00 : randGaussA < 0 ? 0 : randGaussA;
+                var clampedB = randGaussB > 1.00 ? 1.00 : randGaussB < 0 ? 0 : randGaussB;
+
+                int slicePointa = (int) Math.Floor(clampedA * randIndividuala.Genes.Count());
+                int slicePointb = (int) Math.Floor(clampedB * randIndividualb.Genes.Count());
+
+                Console.WriteLine($"a:{slicePointa} b:{slicePointb}");
+
+                var seconda = randIndividuala.Genes
+                            .Skip(slicePointa);
+
+                var secondb = randIndividualb.Genes
+                            .Skip(slicePointb);
+
+                Console.WriteLine($"{string.Join("", randIndividuala.Genes.Take(slicePointa))} , {string.Join("", randIndividualb.Genes.Take(slicePointb))}");
+                Console.WriteLine($"{string.Join("", seconda)} , {string.Join("", secondb)}");
+
+
+                List<string> genesa = randIndividuala.Genes
+                                        .Take(slicePointa)
+                                        .Concat(secondb)
+                                        .ToList();
+
+                List<string> genesb = randIndividualb.Genes
+                                        .Take(slicePointb)
+                                        .Concat(seconda)
+                                        .ToList();
+
+                Console.WriteLine(string.Join("", genesa));
+                Console.WriteLine(string.Join("", genesb));
+                //Individual childa = new Individual();
+                //Individual childb = new Individual();
+
+                
             }
+
+            //if(FittestPop != null)
+            //{
+            //    //foreach(var indiv in FittestPop)
+            //    //{
+            //    //    Console.WriteLine(string.Join("",indiv.Genes));
+            //    //}
+            //}
         }
 
     }
