@@ -31,5 +31,17 @@ namespace String_GA
                 Console.WriteLine($"{string.Join("", item.Genes)}, fitness: {item.Fitness}");
             }
         }
+
+        // Crosses by using fittest of population.
+        public void CrossPopulation()
+        {
+            if(FittestPop != null)
+            {
+                foreach(var indiv in FittestPop)
+                {
+                    Console.WriteLine(string.Join("",indiv.Genes));
+                }
+            }
+        }
     }
 }

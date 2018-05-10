@@ -12,9 +12,12 @@ namespace String_GA
         {
             Console.WriteLine(Population.Matchedstring);
             var pop = new Population();
+
             pop.CreatePopulation();
 
             pop.GetFittest(40);
+
+            pop.CrossPopulation();
 
             Console.ReadLine();
         }
