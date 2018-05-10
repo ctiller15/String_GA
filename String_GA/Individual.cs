@@ -15,7 +15,6 @@ namespace String_GA
         public void GetLength(int maxLength)
         {
             Length = Services.Rand.Next(maxLength);
-            //Console.WriteLine(Length);
         }
 
         public char GetRandomCharacter()
@@ -36,7 +35,6 @@ namespace String_GA
 
                 Genes.Add(Convert.ToString(GetRandomCharacter()));
             }
-            //Console.WriteLine(string.Join("", Genes));
         }
 
         public void CalculateFitness()
@@ -44,25 +42,18 @@ namespace String_GA
             Console.WriteLine(string.Join("", Genes));
             // First calculate based on length.
             int LengthFitness = (Population.Matchedstring.Count() - Math.Abs(Population.Matchedstring.Count() - Length));
-            //Console.WriteLine($"Length fitness: {LengthFitness}");
-            // Then calculate based on having correct letters.
 
+            // Then calculate based on having correct letters.
             // If it has the right letter, add to the fitness...
             var strBucket = Services.CreateBucket(Genes);
 
             // Probably weight a little heavier.
             int StringFitness = CalculateStringFitness(strBucket);
 
-            //Console.WriteLine($"String fitness: {StringFitness}");
-
             // Then calculate based on having letters in correct position.
             int MatchFitness = 0;
 
-            // If the length of the genestring is greater than the length of the matching string...
-
             MatchFitness = CalculateMatchFitness();
-
-            //Console.WriteLine($"Match Fitness: {MatchFitness}");
 
             int TotalFitness = CalculateTotalFitness(LengthFitness, StringFitness, MatchFitness);
 
