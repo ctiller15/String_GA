@@ -12,6 +12,7 @@ namespace String_GA
         public static Dictionary<char, int> MatchedStringBucket { get; set; } = Services.CreateBucket(Matchedstring.ToCharArray().Select(s => s.ToString()).ToList());
         public int PopSize { get; set; } = 10;
         public List<Individual> Populus { get; set; } = new List<Individual>();
+        public List<Individual> NextPop { get; set; } = new List<Individual>();
         public List<Individual> FittestPop { get; set; }
 
         public void CreatePopulation()
@@ -35,6 +36,7 @@ namespace String_GA
         // Crosses by using fittest of population.
         public void CrossPopulation()
         {
+            NextPop = new List<Individual>();
 
             for(int i = 0; i < PopSize; i++)
             {
@@ -77,19 +79,31 @@ namespace String_GA
 
                 Console.WriteLine(string.Join("", genesa));
                 Console.WriteLine(string.Join("", genesb));
-                //Individual childa = new Individual();
-                //Individual childb = new Individual();
+                Individual childa = new Individual(genesa);
+                Individual childb = new Individual(genesb);
 
-                
+                Console.WriteLine(childa.Fitness);
+                Console.WriteLine(childb.Fitness);
+
+                if(childa.Fitness >= childb.Fitness)
+                {
+                    NextPop.Add(childa);
+                } else
+                {
+                    NextPop.Add(childb);
+                }
+
+
             }
 
-            //if(FittestPop != null)
-            //{
-            //    //foreach(var indiv in FittestPop)
-            //    //{
-            //    //    Console.WriteLine(string.Join("",indiv.Genes));
-            //    //}
-            //}
+            //return NextPop;
+
+        }
+
+        public void ReplacePopulation()
+        {
+            Populus = NextPop;
+            NextPop = null;
         }
 
     }

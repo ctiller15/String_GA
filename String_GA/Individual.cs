@@ -115,5 +115,12 @@ namespace String_GA
             PopulateGenes();
             CalculateFitness();
         }
+
+        public Individual(List<string> genes)
+        {
+            Genes = genes;
+            Length = Genes.Count();
+            CalculateFitness();
+        }
     }
 }

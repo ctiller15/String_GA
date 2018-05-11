@@ -19,6 +19,8 @@ namespace String_GA
 
             pop.CrossPopulation();
 
+            pop.ReplacePopulation();
+
             Console.ReadLine();
         }
     }
