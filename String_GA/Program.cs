@@ -25,12 +25,12 @@ namespace String_GA
 
             Console.WriteLine($"Generation: {generationCount} , Fittest: {String.Join("",pop.FittestPop[0].Genes)} , Fitness: {pop.FittestPop[0].Fitness}");
 
-            while((String.Join("", pop.FittestPop[0].Genes) != Population.Matchedstring && generationCount < 500)){
+            while((String.Join("", pop.FittestPop[0].Genes) != Population.Matchedstring && generationCount < 1000)){
                 generationCount++;
                 // Crosses entire population.
                 pop.CrossPopulation();
 
-                pop.GetFittest(40);
+                pop.GetFittest(20);
                 //foreach(var ind in pop.Populus)
                 //{
                 //    Console.WriteLine(String.Join(",",ind.Genes));

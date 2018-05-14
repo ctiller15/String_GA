@@ -8,9 +8,9 @@ namespace String_GA
 {
     class Population
     {
-        public static string Matchedstring = "string";
+        public static string Matchedstring = "Dormammu, I'd like to make a bargain!!!";
         public static Dictionary<char, int> MatchedStringBucket { get; set; } = Services.CreateBucket(Matchedstring.ToCharArray().Select(s => s.ToString()).ToList());
-        public int PopSize { get; set; } = 500;
+        public int PopSize { get; set; } = 2000;
         public List<Individual> Populus { get; set; } = new List<Individual>();
         public List<Individual> NextPop { get; set; } = new List<Individual>();
         public List<Individual> FittestPop { get; set; }

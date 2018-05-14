@@ -109,7 +109,7 @@ namespace String_GA
             List<string> MutatedGenes = new List<string>();
 
             foreach(var gene in Genes)
-                if(Services.Rand.Next() % (Population.Matchedstring.Count()) <= 1)
+                if(Services.Rand.Next() % (Population.Matchedstring.Count() * 10) <= 1)
                 {
                     MutatedGenes.Add(Convert.ToString(GetRandomCharacter()));
                 } else
@@ -127,7 +127,7 @@ namespace String_GA
 
         static int CalculateTotalFitness(int lenFit, int strFit, int matchFit)
         {
-            int TotalFitness = (lenFit * 2) + (strFit * 5) + (matchFit * 10);
+            int TotalFitness = (lenFit * 3) + (strFit * 2) + (matchFit * 15);
             return TotalFitness;
         }
 
