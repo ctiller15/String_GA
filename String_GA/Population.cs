@@ -41,41 +41,16 @@ namespace String_GA
             for(int i = 0; i < PopSize; i++)
             {
                 Console.WriteLine("\n");
-                var randIndividuala = FittestPop[Services.Rand.Next(FittestPop.Count())];
-                var randIndividualb = FittestPop[Services.Rand.Next(FittestPop.Count())];
-                Console.WriteLine($"{string.Join("", randIndividuala.Genes)} , {string.Join("", randIndividualb.Genes)}");
 
-                // Create the slice points, more weighted towards the center via a gaussian distribution.
-                var randGaussA = Services.RandGaussian();
-                var randGaussB = Services.RandGaussian();
+                var SplitGenesA = SliceDice();
+                var SplitGenesB = SliceDice();
 
-                var clampedA = randGaussA > 1.00 ? 1.00 : randGaussA < 0 ? 0 : randGaussA;
-                var clampedB = randGaussB > 1.00 ? 1.00 : randGaussB < 0 ? 0 : randGaussB;
+                Console.WriteLine($"{String.Join("", SplitGenesA[0])} , { String.Join("", SplitGenesA[1])}");
+                Console.WriteLine($"{String.Join("", SplitGenesB[0])} , { String.Join("", SplitGenesB[1])}");
 
-                int slicePointa = (int) Math.Floor(clampedA * randIndividuala.Genes.Count());
-                int slicePointb = (int) Math.Floor(clampedB * randIndividualb.Genes.Count());
+                List<string> genesa = SplitGenesA[0].Concat(SplitGenesB[1]).ToList();
 
-                Console.WriteLine($"a:{slicePointa} b:{slicePointb}");
-
-                var seconda = randIndividuala.Genes
-                            .Skip(slicePointa);
-
-                var secondb = randIndividualb.Genes
-                            .Skip(slicePointb);
-
-                Console.WriteLine($"{string.Join("", randIndividuala.Genes.Take(slicePointa))} , {string.Join("", randIndividualb.Genes.Take(slicePointb))}");
-                Console.WriteLine($"{string.Join("", seconda)} , {string.Join("", secondb)}");
-
-
-                List<string> genesa = randIndividuala.Genes
-                                        .Take(slicePointa)
-                                        .Concat(secondb)
-                                        .ToList();
-
-                List<string> genesb = randIndividualb.Genes
-                                        .Take(slicePointb)
-                                        .Concat(seconda)
-                                        .ToList();
+                List<string> genesb = SplitGenesB[0].Concat(SplitGenesA[1]).ToList();
 
                 Console.WriteLine(string.Join("", genesa));
                 Console.WriteLine(string.Join("", genesb));
@@ -98,6 +73,21 @@ namespace String_GA
 
             //return NextPop;
 
+        }
+
+        public IEnumerable<string>[] SliceDice()
+        {
+            var randIndividual = FittestPop[Services.Rand.Next(FittestPop.Count())];
+            var randGauss = Services.RandGaussian();
+            var clamped = randGauss > 1.00 ? 1.00 : randGauss < 0 ? 0 : randGauss;
+
+            // Create the slice point, more weighted towards the center via a gaussian distribution.
+            int slicePoint = (int)Math.Floor(clamped * randIndividual.Genes.Count());
+
+            // Create the individual cuts for each gene.
+            var second = randIndividual.Genes.Skip(slicePoint);
+            var first = randIndividual.Genes.Take(slicePoint);
+            return new IEnumerable<string>[] { first, second };
         }
 
         public void ReplacePopulation()
