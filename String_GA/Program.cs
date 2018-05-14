@@ -10,19 +10,40 @@ namespace String_GA
     {
         static void Main(string[] args)
         {
+            int generationCount = 0;
+
             Console.WriteLine(Population.Matchedstring);
             var pop = new Population();
 
+            // Creates population and calculates fitness for every individual.
             pop.CreatePopulation();
 
+
+
+            // Gets the top % of fittest individuals.
             pop.GetFittest(40);
 
-            pop.CrossPopulation();
+            Console.WriteLine($"Generation: {generationCount} , Fittest: {String.Join("",pop.FittestPop[0].Genes)} , Fitness: {pop.FittestPop[0].Fitness}");
 
-            pop.ReplacePopulation();
+            while((String.Join("", pop.FittestPop[0].Genes) != Population.Matchedstring && generationCount < 500)){
+                generationCount++;
+                // Crosses entire population.
+                pop.CrossPopulation();
 
-            // Mutate the population.
-            pop.MutateGenes();
+                pop.GetFittest(40);
+                //foreach(var ind in pop.Populus)
+                //{
+                //    Console.WriteLine(String.Join(",",ind.Genes));
+                //}
+
+                // Replaces entire population.
+                pop.ReplacePopulation();
+
+                // Mutate the population.
+                pop.MutateGenes();
+                Console.WriteLine($"Generation: {generationCount} , Fittest: {String.Join("", pop.FittestPop[0].Genes)} , Fitness: {pop.FittestPop[0].Fitness}");
+            }
+
 
             Console.ReadLine();
         }

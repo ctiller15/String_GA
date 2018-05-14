@@ -10,7 +10,7 @@ namespace String_GA
     {
         public static string Matchedstring = "string";
         public static Dictionary<char, int> MatchedStringBucket { get; set; } = Services.CreateBucket(Matchedstring.ToCharArray().Select(s => s.ToString()).ToList());
-        public int PopSize { get; set; } = 10;
+        public int PopSize { get; set; } = 500;
         public List<Individual> Populus { get; set; } = new List<Individual>();
         public List<Individual> NextPop { get; set; } = new List<Individual>();
         public List<Individual> FittestPop { get; set; }
@@ -29,7 +29,7 @@ namespace String_GA
             FittestPop = Populus.OrderByDescending(o => o.Fitness).Take(percentageCount).ToList();
             foreach(var item in FittestPop)
             {
-                Console.WriteLine($"{string.Join("", item.Genes)}, fitness: {item.Fitness}");
+                //Console.WriteLine($"{string.Join("", item.Genes)}, fitness: {item.Fitness}");
             }
         }
 
@@ -40,25 +40,25 @@ namespace String_GA
 
             for(int i = 0; i < PopSize; i++)
             {
-                Console.WriteLine("\n");
+                //Console.WriteLine("\n");
 
                 var SplitGenesA = SliceDice();
                 var SplitGenesB = SliceDice();
 
-                Console.WriteLine($"{String.Join("", SplitGenesA[0])} , { String.Join("", SplitGenesA[1])}");
-                Console.WriteLine($"{String.Join("", SplitGenesB[0])} , { String.Join("", SplitGenesB[1])}");
+                //Console.WriteLine($"{String.Join("", SplitGenesA[0])} , { String.Join("", SplitGenesA[1])}");
+                //Console.WriteLine($"{String.Join("", SplitGenesB[0])} , { String.Join("", SplitGenesB[1])}");
 
                 List<string> genesa = SplitGenesA[0].Concat(SplitGenesB[1]).ToList();
 
                 List<string> genesb = SplitGenesB[0].Concat(SplitGenesA[1]).ToList();
 
-                Console.WriteLine(string.Join("", genesa));
-                Console.WriteLine(string.Join("", genesb));
+                //Console.WriteLine(string.Join("", genesa));
+                //Console.WriteLine(string.Join("", genesb));
                 Individual childa = new Individual(genesa);
                 Individual childb = new Individual(genesb);
 
-                Console.WriteLine(childa.Fitness);
-                Console.WriteLine(childb.Fitness);
+                //Console.WriteLine(childa.Fitness);
+                //Console.WriteLine(childb.Fitness);
 
                 if(childa.Fitness >= childb.Fitness)
                 {

@@ -105,25 +105,29 @@ namespace String_GA
 
         public void MutateSelf()
         {
-            int numChars = 94;
+            //int numChars = 94;
             List<string> MutatedGenes = new List<string>();
 
             foreach(var gene in Genes)
-                if(Services.Rand.Next() % (numChars * 2) <= 1)
+                if(Services.Rand.Next() % (Population.Matchedstring.Count()) <= 1)
                 {
                     MutatedGenes.Add(Convert.ToString(GetRandomCharacter()));
                 } else
                 {
                     MutatedGenes.Add(gene);
                 }
-            Console.WriteLine(String.Join("", Genes));
-            Console.WriteLine(String.Join("", MutatedGenes));
+
+            //Console.WriteLine($"{String.Join("", Genes)} , {Fitness}");
             Genes = MutatedGenes;
+
+            CalculateFitness();
+
+            //Console.WriteLine($"{String.Join("", MutatedGenes)} , {Fitness}");
         }
 
         static int CalculateTotalFitness(int lenFit, int strFit, int matchFit)
         {
-            int TotalFitness = lenFit + (strFit * 3) + (matchFit * 5);
+            int TotalFitness = (lenFit * 2) + (strFit * 5) + (matchFit * 10);
             return TotalFitness;
         }
 

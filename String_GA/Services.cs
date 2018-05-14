@@ -20,7 +20,7 @@ namespace String_GA
             double u2 = 1.0 - Rand.NextDouble();
             double randStdNormal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);
             double randNormal = (mean + stdDev * randStdNormal + 1) / 2; // Shift gaussian over to the right.
-            Console.WriteLine(randNormal);
+            //Console.WriteLine(randNormal);
             return randNormal;
         }
 
