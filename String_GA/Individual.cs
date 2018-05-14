@@ -109,7 +109,7 @@ namespace String_GA
             List<string> MutatedGenes = new List<string>();
 
             foreach(var gene in Genes)
-                if(Services.Rand.Next() % (Population.Matchedstring.Count() * 15) <= 1)
+                if(Services.Rand.Next() % (Population.Matchedstring.Count() * 11) <= 1)
                 {
                     MutatedGenes.Add(Convert.ToString(GetRandomCharacter()));
                 } else

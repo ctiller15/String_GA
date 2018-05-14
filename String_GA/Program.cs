@@ -21,7 +21,7 @@ namespace String_GA
 
 
             // Gets the top % of fittest individuals.
-            pop.GetFittest(40);
+            pop.GetFittest(20);
 
             Console.WriteLine($"Generation: {generationCount} , Fittest: {String.Join("",pop.FittestPop[0].Genes)} , Fitness: {pop.FittestPop[0].Fitness}");
 
