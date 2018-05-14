@@ -103,6 +103,24 @@ namespace String_GA
             return MatchFitness;
         }
 
+        public void MutateSelf()
+        {
+            int numChars = 94;
+            List<string> MutatedGenes = new List<string>();
+
+            foreach(var gene in Genes)
+                if(Services.Rand.Next() % (numChars * 2) <= 1)
+                {
+                    MutatedGenes.Add(Convert.ToString(GetRandomCharacter()));
+                } else
+                {
+                    MutatedGenes.Add(gene);
+                }
+            Console.WriteLine(String.Join("", Genes));
+            Console.WriteLine(String.Join("", MutatedGenes));
+            Genes = MutatedGenes;
+        }
+
         static int CalculateTotalFitness(int lenFit, int strFit, int matchFit)
         {
             int TotalFitness = lenFit + (strFit * 3) + (matchFit * 5);

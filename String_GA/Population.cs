@@ -90,10 +90,20 @@ namespace String_GA
             return new IEnumerable<string>[] { first, second };
         }
 
+
+
         public void ReplacePopulation()
         {
             Populus = NextPop;
             NextPop = null;
+        }
+
+        public void MutateGenes()
+        {
+            foreach (var ind in Populus)
+            {
+                ind.MutateSelf();
+            }
         }
 
     }

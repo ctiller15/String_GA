@@ -21,6 +21,9 @@ namespace String_GA
 
             pop.ReplacePopulation();
 
+            // Mutate the population.
+            pop.MutateGenes();
+
             Console.ReadLine();
         }
     }
